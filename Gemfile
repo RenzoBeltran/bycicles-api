@@ -12,6 +12,11 @@ gem 'puma', '~> 4.1'
 # Authentication
 gem 'devise' 
 gem 'devise-jwt'
+# Linting ruby
+gem 'rubocop'
+# Serialitzation gem
+gem 'active_model_serializers'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
