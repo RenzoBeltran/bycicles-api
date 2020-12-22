@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     post '/signin', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
   end
-  resources :categories
-  resources :products
+  scope :api do
+    resources :categories
+    resources :products
+  end
 end
