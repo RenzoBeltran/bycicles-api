@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Install Ruby 2.5.7
 
-Things you may want to cover:
+* Use bundle install
 
-* Ruby version
+* Postgresql 
 
-* System dependencies
+* rails db:create
 
-* Configuration
+* rails db:migrate
 
-* Database creation
+* rails s
 
-* Database initialization
+* And that's it...
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
