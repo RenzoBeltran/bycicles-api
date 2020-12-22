@@ -1,44 +1,38 @@
+# Product class
 class ProductsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_product, only: %i[show update destroy]
   def index
     @product = Product.all
     render json: @product
   end
 
   def show
-    @product = Product.find(params[:id])
     render json: @product
   end
 
   def create
-    @category = Category.find(params[:category_id])
-    @product = @category.products.create(
-      product_code: params[:product_code],
-      name: params[:name],
-      brand: params[:brand],
-      quantity: params[:quantity],
-      price: params[:price],
-  )
-  render json: @product
+    @product = Product.create product_params
+    render json: @product
   end
 
   def update
-    @product = Product.find(params[:id])
-    @product.update(
-      product_code: params[:product_code],
-      name: params[:name],
-      brand: params[:brand],
-      quantity: params[:quantity],
-      price: params[:price],
-      category_id: params[:category_id]
-        )
+    @product.update product_params
     render json: @product
   end
 
   def destroy
-    @product = Product.all 
-    @product = Product.find(params[:id])
     @product.destroy
-    render json: @product
+    render json: 204
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:product_code, :name, :brand, :quantity, :price, :category_id)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 end

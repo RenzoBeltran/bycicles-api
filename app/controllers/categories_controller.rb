@@ -1,36 +1,39 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_category
+  before_action :set_category, only: %i[show update destroy]
+
   def index
     @categories = Category.all
     render json: @categories
   end
 
   def show
-    @category = Category.find(params[:id])
     render json: @category
   end
 
   def create
-    @Category = Category.create(
-      category_code: params[:category_code],
-      name: params[:name]
-  )
-  render json: @category
+    @category = Category.create category_params
+    render json: @category
   end
 
   def update
-    @category = Category.find(params[:id])
-    @category.update(
-        category_code: params[:category_code],
-        name: params[:name]
-        )
+    @category.update category_params
     render json: @category
   end
 
   def destroy
-    @categories = Category.all 
-    @category = Category.find(params[:id])
     @category.destroy
-    render json: @categories
+    render json: :no_content
+  end
+
+  private
+
+  def category_params
+    params.require(:category).permit(:category_code, :name)
+  end
+
+  def set_category
+    @category = Category.find(params[:id])
   end
 end
